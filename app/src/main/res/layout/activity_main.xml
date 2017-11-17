@@ -83,6 +83,19 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp" />
 
+    <TextView
+            android:id="@+id/sliderText"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <SeekBar
+            android:id="@+id/speedSlider"
+            android:max="100"
+            android:progress="50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/forward"
         android:layout_width="wrap_content"

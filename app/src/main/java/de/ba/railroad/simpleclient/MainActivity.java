@@ -88,6 +88,13 @@ public class MainActivity extends AppCompatActivity implements LocomotiveJSONPro
 
         findViewById(R.id.stop).setOnClickListener(v -> locomotive.setSpeed(0));
 
+        SeekBar seekBar = findViewById(R.id.speedSlider);
+        seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+
+        int progress = seekBar.getProgress();
+        tvProgressLabel = findViewById(R.id.sliderText);
+        tvProgressLabel.setText("Progress: " + progress);
+
         findViewById(R.id.send).setOnClickListener(v -> {
             TextView speedView = (TextView) MainActivity.this.findViewById(R.id.speed);
             int speed = Integer.parseInt(String.valueOf(speedView.getText()));
@@ -162,6 +169,25 @@ public class MainActivity extends AppCompatActivity implements LocomotiveJSONPro
             }
         });
     }
+
+    SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int speed, boolean fromUser) {
+            tvProgressLabel.setText("Speed " + speed);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            locomotive.setSpeed(speed);
+            // called after the user finishes moving the SeekBar
+        }
+    };
 
     /**
      * Update the content of all GUI elements with the <code>locomotive</code>
