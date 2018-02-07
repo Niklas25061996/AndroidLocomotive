@@ -6,176 +6,346 @@
     android:layout_height="match_parent"
     tools:context="de.ba.railroad.simpleclient.MainActivity">
 
-    <TextView
-        android:id="@+id/switchErrors"
+    <VideoView
+        android:id="@+id/stream"
         android:layout_width="0dp"
-        android:layout_height="78dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sw1" />
+        android:text="Zeit"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintEnd_toStartOf="@+id/chronometer6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stream" />
 
-    <Button
-        android:id="@+id/sw3"
+    <Chronometer
+        android:id="@+id/chronometer6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="Switch 3"
-        app:layout_constraintLeft_toRightOf="@+id/sw2"
-        app:layout_constraintTop_toBottomOf="@+id/switchSpinner" />
-
-    <Button
-        android:id="@+id/sw4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Switch 4"
-        app:layout_constraintLeft_toRightOf="@+id/sw3"
-        app:layout_constraintTop_toBottomOf="@+id/switchSpinner" />
-
-    <EditText
-        android:id="@+id/speed"
-        android:layout_width="123dp"
-        android:layout_height="46dp"
-        android:ems="10"
-        android:inputType="number"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner"
-        android:layout_marginStart="8dp" />
-
-    <Button
-        android:id="@+id/send"
-        android:layout_width="99dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="SEND"
-        app:layout_constraintLeft_toRightOf="@+id/speed"
-        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner"
-        android:layout_marginStart="8dp" />
-
-    <Button
-        android:id="@+id/backward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Backward"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/speed"
-        app:layout_constraintLeft_toRightOf="@+id/forward"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp" />
-
-    <Button
-        android:id="@+id/horn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Horn"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/speed"
-        app:layout_constraintLeft_toRightOf="@+id/backward"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp" />
-
-    <TextView
-            android:id="@+id/sliderText"
-            android:layout_margin="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/stream" />
 
     <SeekBar
-            android:id="@+id/speedSlider"
-            android:max="100"
-            android:progress="50"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/forward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forward"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/speed"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp" />
-
-    <Spinner
-        android:id="@+id/locomotiveSpinner"
-        android:layout_width="368dp"
-        android:layout_height="37dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <Spinner
-        android:id="@+id/switchSpinner"
-        android:layout_width="368dp"
-        android:layout_height="37dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locomotiveErrors"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <TextView
-        android:id="@+id/locomotiveErrors"
+        android:id="@+id/speedSlider"
+        style="@android:style/Widget.Material.SeekBar"
         android:layout_width="0dp"
-        android:layout_height="78dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forward"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <Button
-        android:id="@+id/stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="Stop"
-        app:layout_constraintLeft_toRightOf="@+id/send"
-        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner"
-        android:layout_marginStart="8dp" />
+        android:layerType="software"
+        android:max="255"
+        android:progress="50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/sw1"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch 1"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/switchSpinner"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp" />
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speedSlider">
 
-    <Button
-        android:id="@+id/sw2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="▲"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            app:layout_constraintEnd_toEndOf="@+id/backward"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/speedSlider" />
+
+        <Button
+            android:id="@+id/backward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="▼"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/forward" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="75dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Switch 2"
-        app:layout_constraintLeft_toRightOf="@+id/sw1"
-        app:layout_constraintTop_toBottomOf="@+id/switchSpinner" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/speedSlider">
+
+        <Switch
+            android:id="@+id/light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Licht"
+            app:layout_constraintEnd_toStartOf="@+id/horn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/horn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/light"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/locomotiveSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/light" />
+
+        <Switch
+            android:id="@+id/smoke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Rauch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner" />
+
+        <EditText
+            android:id="@+id/locomotiveErrors"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="enter Code"
+            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/smoke" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="▶"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locomotiveErrors"
+            app:layout_constraintTop_toBottomOf="@+id/smoke" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/stat1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Licht:"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/stat7"
+            app:layout_constraintEnd_toStartOf="@+id/stat2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stat2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="An"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/stat8"
+            app:layout_constraintEnd_toStartOf="@+id/stat3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stat3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Ton:"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/stat9"
+            app:layout_constraintEnd_toStartOf="@+id/stat4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stat4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Aus"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/stat10"
+            app:layout_constraintEnd_toStartOf="@+id/stat5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/stat5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Rauch:"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/stat11"
+            app:layout_constraintEnd_toStartOf="@+id/stat6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stat6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="deaktiviert"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/stat12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stat7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Zug:"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/stat8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stat1" />
+
+        <TextView
+            android:id="@+id/stat8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Typ 1"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/stat9"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat7"
+            app:layout_constraintTop_toBottomOf="@+id/stat2" />
+
+        <TextView
+            android:id="@+id/stat9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Richtung:"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/stat10"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat8"
+            app:layout_constraintTop_toBottomOf="@+id/stat3" />
+
+        <TextView
+            android:id="@+id/stat10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Vorwärts"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/stat11"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat9"
+            app:layout_constraintTop_toBottomOf="@+id/stat4" />
+
+        <TextView
+            android:id="@+id/stat11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Geschwindigkeit:"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/stat12"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat10"
+            app:layout_constraintTop_toBottomOf="@+id/stat5" />
+
+        <TextView
+            android:id="@+id/stat12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="300"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stat11"
+            app:layout_constraintTop_toBottomOf="@+id/stat6" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
