@@ -29,7 +29,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="24dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
         android:singleLine="false"
@@ -38,8 +37,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner"
-        tools:text="enter Code" />
+        tools:text="enter Code"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner" />
 
     <Button
         android:id="@+id/codeButton"
@@ -70,24 +70,22 @@
         android:id="@+id/Zeit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Zeit"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintEnd_toStartOf="@+id/timer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner"
-        tools:layout_editor_absoluteX="107dp" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/stream" />
 
     <Chronometer
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Zeit"
-        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner"
-        tools:layout_editor_absoluteX="253dp" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/stream" />
 
     <SeekBar
         android:id="@+id/speedSlider"
@@ -96,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layerType="software"
-        android:max="255"
+        android:max="400"
         android:progress="50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,30 +105,46 @@
         android:id="@+id/switches"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/stats"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/direction"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codeInput"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/locomotiveSpinner">
 
         <Switch
             android:id="@+id/horn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            android:layout_weight="1"
+            android:text="Hupe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Geräusche"
+            app:layout_constraintBottom_toTopOf="@+id/light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            android:layout_marginTop="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/horn" />
 
         <Switch
             android:id="@+id/smoke"
@@ -141,7 +155,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Rauch"
+            android:text="Rauch / Kabinenlicht"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +176,7 @@
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/horn"
+            app:layout_constraintTop_toBottomOf="@+id/sound"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp" />
     </android.support.constraint.ConstraintLayout>
@@ -183,6 +197,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="Licht:"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/stat7"
@@ -197,13 +212,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="An"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/stat8"
             app:layout_constraintEnd_toStartOf="@+id/stat3"
             app:layout_constraintStart_toEndOf="@+id/stat1"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="64dp" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/stat3"
@@ -211,13 +226,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Ton:"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/stat9"
             app:layout_constraintEnd_toStartOf="@+id/stat4"
             app:layout_constraintStart_toEndOf="@+id/stat2"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="128dp" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/stat4"
@@ -225,13 +240,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Aus"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/stat10"
             app:layout_constraintEnd_toStartOf="@+id/stat5"
             app:layout_constraintStart_toEndOf="@+id/stat3"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="192dp" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <TextView
@@ -240,13 +255,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Rauch:"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/stat11"
             app:layout_constraintEnd_toStartOf="@+id/stat6"
             app:layout_constraintStart_toEndOf="@+id/stat4"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="256dp" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/stat6"
@@ -255,6 +270,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="deaktiviert"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/stat12"
@@ -270,6 +286,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="Zug:"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -284,6 +301,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Typ 1"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -297,6 +315,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Richtung:"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -310,6 +329,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Vorwärts"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -323,6 +343,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Speed:"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -337,6 +358,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="300"
+            android:textColor="@android:color/white"
             android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -376,8 +398,7 @@
         app:layout_constraintBottom_toTopOf="@+id/stats"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/speedSlider"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
             android:id="@+id/forward"
@@ -404,12 +425,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forward" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="enter Code"
-        tools:layout_editor_absoluteX="331dp"
-        tools:layout_editor_absoluteY="248dp" />
 
 </android.support.constraint.ConstraintLayout>
