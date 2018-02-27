@@ -1,18 +1,22 @@
 package de.ba.railroad.simpleclient;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 import android.widget.Button;
+import android.os.SystemClock;
 
 import android.net.Uri;
 
@@ -20,14 +24,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+
 import de.ba.railroadclient.LocomotiveJSONProxy;
 import de.ba.railroadclient.LocomotiveListAdapter;
 import de.ba.railroadclient.SwitchJSONProxy;
-import de.ba.railroadclient.SwitchListAdapter;
 import model.Locomotive;
 import model.LocomotiveServer;
 import model.SwitchGroup;
-import model.SwitchServer;
 
 public class MainActivity extends AppCompatActivity implements LocomotiveJSONProxy.LocomotiveListener, SwitchJSONProxy.SwitchListener {
 
@@ -53,44 +57,89 @@ public class MainActivity extends AppCompatActivity implements LocomotiveJSONPro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // will later show the Garteneisenbahn video stream
         VideoView videoView = (VideoView) findViewById(R.id.stream);
-        Uri uri = Uri.parse("http://www.tt-modellbahn-weimar.de/show/videos/beladung.mp4");
-        videoView.setVideoURI(uri);
-        videoView.start();
+
+
+        // Gartenbahnfahrzeittimer TM
+        Chronometer timer = (Chronometer) findViewById(R.id.timer);
+        timer.setCountDown(true);
+
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.speedSlider);
 
-        SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+        seekBar.setOnSeekBarChangeListener(
 
-            int speed = 0;
+            new SeekBar.OnSeekBarChangeListener() {
 
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                speed = progress;
+                int speed = 0;
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    if (fromUser) {
+                        speed = progress;
+                    }
+
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    locomotive.setSpeed(speed);
+
+                }
             }
+        );
 
+        // the two UI parts, code entry and the control UI get added to different lists so their
+        // visibility can be toggled
+        ArrayList<View> CodeEntry = new ArrayList<View>();
+        CodeEntry.add(findViewById(R.id.codeInput));
+        CodeEntry.add(findViewById(R.id.codeButton));
+
+        ArrayList<View> UIElements = new ArrayList<View>();
+        UIElements.add(findViewById(R.id.Zeit));
+        UIElements.add(findViewById(R.id.timer));
+        UIElements.add(findViewById(R.id.speedSlider));
+        UIElements.add(findViewById(R.id.min));
+        UIElements.add(findViewById(R.id.Max));
+        UIElements.add(findViewById(R.id.direction));
+        UIElements.add(findViewById(R.id.switches));
+        UIElements.add(findViewById(R.id.stats));
+
+        // hide most of the UI until code is entered
+        for (View element : UIElements) {
+            element.setVisibility(View.INVISIBLE);
+        }
+
+        timer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // called when the user first touches the SeekBar
+            public void onChronometerTick(Chronometer chronometer) {
+                // toggle the UI when the timer reaches 0
+                if(Math.floor((SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000) == 0.0){
+                    for (View element : UIElements) {
+                        element.setVisibility(View.INVISIBLE);
+                    }
+
+                    for (View element : CodeEntry) {
+                        element.setVisibility(View.VISIBLE);
+                    }
+                }
             }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                locomotive.setSpeed(speed);
-                // called after the user finishes moving the SeekBar
-            }
-        };
-
-        seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
-
-        // change the train once so the ui gets updated
-        //locomotive.setDrivingSound(!locomotive.isDrivingSound());
-        //locomotive.setDrivingSound(!locomotive.isDrivingSound());
+        });
 
         // listener to display errors
         Response.ErrorListener locomotiveErrorListener = error -> {
-            TextView errorView = (TextView) MainActivity.this.findViewById(R.id.locomotiveErrors);
-            errorView.setText(error.getMessage());
+            Context context = getApplicationContext();
+            CharSequence text = error.getMessage();
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         };
 
         // create a request que for HTTP POST and GET
@@ -112,8 +161,17 @@ public class MainActivity extends AppCompatActivity implements LocomotiveJSONPro
                 LocomotiveServer locomotiveServer = (LocomotiveServer) parent.getAdapter().getItem(position);
                 locomotive.setLocomotiveServer(locomotiveServer);
 
-                TextView errorView = (TextView) MainActivity.this.findViewById(R.id.locomotiveErrors);
+                TextView errorView = (TextView) MainActivity.this.findViewById(R.id.codeInput);
                 errorView.setText(locomotiveServer.getRestURL());
+
+                // toggle locomotive to refresh UI
+                boolean toggle = locomotive.isDrivingSound();
+                locomotive.setDrivingSound(!toggle);
+                locomotive.setDrivingSound(!toggle);
+
+                Uri uri = Uri.parse("http://www.tt-modellbahn-weimar.de/show/videos/beladung.mp4");
+                videoView.setVideoURI(uri);
+                videoView.start();
             }
 
             @Override
@@ -137,10 +195,37 @@ public class MainActivity extends AppCompatActivity implements LocomotiveJSONPro
 
         // listener to display errors
         Response.ErrorListener switchErrorListener = error -> {
-            TextView errorView = (TextView) MainActivity.this.findViewById(R.id.locomotiveErrors);
-            errorView.setText(error.getMessage());
+            Context context = getApplicationContext();
+            CharSequence text = error.getMessage();
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         };
 
+        findViewById(R.id.codeButton).setOnClickListener(v -> {
+            EditText input = (EditText) findViewById(R.id.codeInput);
+            setTimer(timer, Integer.parseInt(input.getText().toString()));
+
+            // toggle all view elements
+            for (View element : UIElements) {
+                element.setVisibility(View.VISIBLE);
+            }
+            for (View element : CodeEntry) {
+                element.setVisibility(View.INVISIBLE);
+            }
+        }); // set the timer to 5 minutes
+
+    }
+
+    /**
+     *
+     * @param timer
+     * @param time time in seconds
+     */
+    private void setTimer(Chronometer timer ,int time) {
+        timer.setBase(SystemClock.elapsedRealtime() + time * 1000);
+        timer.start();
     }
 
     /**
@@ -191,9 +276,6 @@ public class MainActivity extends AppCompatActivity implements LocomotiveJSONPro
             smokeSwitch.setChecked(false);
         }
 
-        lightView.setText(locomotive.isHeadLight() ? "An" : "Aus");
-        soundView.setText(locomotive.isHornSound() ? "An" : "Aus");
-        smokeView.setText(locomotive.isCabineLighting() ? "An" : "Aus");
         trainView.setText(locomotive.getName());
 
         int direction = locomotive.getDirection();
@@ -207,11 +289,12 @@ public class MainActivity extends AppCompatActivity implements LocomotiveJSONPro
             backward.setTextColor(Color.BLACK);
         }
 
+        speedSlider.setProgress(locomotive.getSpeed());
         speedView.setText("" + Math.abs(locomotive.getSpeed()));
     }
 
     @Override
     public void switchChanged(SwitchGroup switchGroup) {
-
+        // not implemented
     }
 }
